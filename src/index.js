@@ -7,10 +7,10 @@ import { registerBlockType } from '@wordpress/blocks';
  * Internal dependencies
  */
 import './style.scss';
-import edit from './edit';
-import save from './save';
+import Edit from './edit';
+import Save from './save';
 
 registerBlockType( 'xwp/country-card', {
-	edit,
-	save,
+	edit: Edit,
+	save: Save,
 } );
