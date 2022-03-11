@@ -27,9 +27,9 @@ export default function Preview( { countryCode, relatedPosts } ) {
 				{ continentNames[continents[countryCode]] }!
 			</h3>
 			<div className="xwp-country-card__related-posts">
-				<h3 className="xwp-country-card__related-posts__heading">
+				<h4 className="xwp-country-card__related-posts__heading">
 					{ hasRelatedPosts ? sprintf( __( 'There are %d related posts:', 'xwp-country-card' ), relatedPosts.length ) : __( 'There are no related posts.', 'xwp-country-card' ) }
-				</h3>
+				</h4>
 				{ hasRelatedPosts && (
 					<ul className="xwp-country-card__related-posts-list">
 						{ relatedPosts.map( ( relatedPost, index ) => (
