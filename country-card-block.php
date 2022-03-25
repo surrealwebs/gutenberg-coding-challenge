@@ -1,5 +1,11 @@
 <?php
 /**
+ * Country Card Block
+ * 
+ * @package           CountryCard
+ * @author            XWP
+ * 
+ * @wordpress-plugin
  * Plugin Name:       Country Card Block
  * Description:       Block rendering a card with country information.
  * Requires at least: 5.8
@@ -8,8 +14,6 @@
  * Author:            XWP
  * Author URI:        https://github.com/xwp
  * Text Domain:       xwp-country-card
- *
- * @package           CountryCard
  */
 
 namespace XWP\CountryCard;
