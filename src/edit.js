@@ -73,7 +73,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							options={ options }
 							value={ countryCode }
 							onChange={ handleChangeCountryCode }
-                            allowReset={true}
+                            allowReset={ true }
 						/>
 					</Placeholder> }
 			</div>
