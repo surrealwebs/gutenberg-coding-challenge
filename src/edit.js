@@ -1,15 +1,19 @@
 import countries from '../assets/countries.json';
 import './editor.scss';
 import { edit, globe } from '@wordpress/icons';
-import { BlockControls } from '@wordpress/block-editor';
+import { BlockControls, useBlockProps } from '@wordpress/block-editor';
 import { ComboboxControl, Placeholder, ToolbarButton, ToolbarGroup } from '@wordpress/components';
 import { getEmojiFlag } from './utils';
-import { useEffect, useState } from '@wordpress/element';
+import { useEffect, useRef, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import Preview from './preview';
 
 export default function Edit( { attributes, setAttributes } ) {
 	const { countryCode, relatedPosts } = attributes;
+
+	const ref = useRef();
+	const blockProps = useBlockProps( { ref } );
+
 	const options = Object.keys(countries).map(code => ({
         value: code,
         label:  getEmojiFlag( code ) + '  ' + countries[code] + ' — ' + code
@@ -36,7 +40,7 @@ export default function Edit( { attributes, setAttributes } ) {
 	useEffect( () => {
 		async function getRelatedPosts() {
 			const postId = window.location.href.match( /post=([\d]+)/ )[ 1 ];
-			const response = await window.fetch( `/wp-json/wp/v2/posts?search=${ countries[ countryCode ] }&exclude=${ postId }` );
+			const response = await window.fetch( `/wp-json/wp/v2/posts?filter[s]=${ countries[ countryCode ] }&exclude=${ postId }` );
 
 			if ( ! response.ok )
 				throw new Error( `HTTP error! Status: ${ response.status }` );
@@ -56,7 +60,7 @@ export default function Edit( { attributes, setAttributes } ) {
 	}, [countryCode, setAttributes] );
 
 	return (
-		<div>
+		<div { ...blockProps }>
 			<BlockControls>
 				<ToolbarGroup>
 						<ToolbarButton label={ __( 'Change Country', 'xwp-country-card' ) }
