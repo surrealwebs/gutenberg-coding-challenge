@@ -56,7 +56,7 @@ export default function Edit( { attributes, setAttributes } ) {
 	}, [countryCode, setAttributes] );
 
 	return (
-		<>
+		<div>
 			<BlockControls>
 				<ToolbarGroup>
 						<ToolbarButton label={ __( 'Change Country', 'xwp-country-card' ) }
@@ -77,6 +77,6 @@ export default function Edit( { attributes, setAttributes } ) {
 						/>
 					</Placeholder> }
 			</div>
-		</>
+		</div>
 	);
 }
