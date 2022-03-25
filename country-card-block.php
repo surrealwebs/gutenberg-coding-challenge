@@ -16,6 +16,10 @@ namespace XWP\CountryCard;
 
 /**
  * Register the block.
+ * 
+ * @since 1.0.0
+ * 
+ * @see register_block_type
  */
 function block_init() {
 	register_block_type( __DIR__ . '/build' );
@@ -25,6 +29,12 @@ add_action( 'init', __NAMESPACE__ . '\\block_init' );
 
 /**
  * Disable WP emojis.
+ * 
+ * @since 1.0.0
+ * 
+ * @see remove_action
+ * @see remove_filter
+ * @see add_filter
  */
 function disable_emojis() {
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
@@ -43,6 +53,8 @@ add_action( 'init', __NAMESPACE__ . '\\disable_emojis' );
 /**
  * Remove emoji CDN hostname from DNS prefetching hints.
  *
+ * @since 1.0.0
+ * 
  * @param array  $urls          URLs to print for resource hints.
  * @param string $relation_type The relation type the URLs are printed for.
  *
