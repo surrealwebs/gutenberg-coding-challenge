@@ -1,14 +1,14 @@
 import { useBlockProps } from '@wordpress/block-editor';
-import { useRef } from '@wordpress/element';
 import Preview from './preview';
 
 export default function Save( { attributes } ) {
 
-	const ref = useRef();
-	const blockProps = useBlockProps( { ref } );
+	const { countryCode, relatedPosts } = attributes;
+
+	const blockProps = useBlockProps.save();
 
 	return (
-		<div { ...blockProps }>
+		<div { ...blockProps } >
 			<Preview { ...attributes } />
 		</div>
 	);

@@ -4,15 +4,17 @@ import { edit, globe } from '@wordpress/icons';
 import { BlockControls, useBlockProps } from '@wordpress/block-editor';
 import { ComboboxControl, Placeholder, ToolbarButton, ToolbarGroup } from '@wordpress/components';
 import { getEmojiFlag } from './utils';
-import { useEffect, useRef, useState } from '@wordpress/element';
+import { useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import Preview from './preview';
 
 export default function Edit( { attributes, setAttributes } ) {
 	const { countryCode, relatedPosts } = attributes;
 
-	const ref = useRef();
-	const blockProps = useBlockProps( { ref } );
+	const blockProps = useBlockProps( {
+		countryCode,
+		relatedPosts
+	} );
 
 	const options = Object.keys(countries).map(code => ({
         value: code,
@@ -64,7 +66,10 @@ export default function Edit( { attributes, setAttributes } ) {
 			<BlockControls>
 				<ToolbarGroup>
 						<ToolbarButton label={ __( 'Change Country', 'xwp-country-card' ) }
-							icon={ edit } onClick={ handleChangeCountry } disabled={ ! Boolean( countryCode ) } />
+							icon={ edit }
+							onClick={ handleChangeCountry } 
+							disabled={ ! Boolean( countryCode ) } 
+						/>
 				</ToolbarGroup>
 			</BlockControls>
 			<div>
