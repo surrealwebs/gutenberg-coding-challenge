@@ -1,5 +1,11 @@
 <?php
 /**
+ * Country Card Block
+ *
+ * @package           CountryCard
+ * @author            XWP
+ *
+ * @wordpress-plugin
  * Plugin Name:       Country Card Block
  * Description:       Block rendering a card with country information.
  * Requires at least: 5.8
@@ -8,14 +14,16 @@
  * Author:            XWP
  * Author URI:        https://github.com/xwp
  * Text Domain:       xwp-country-card
- *
- * @package           CountryCard
  */
 
 namespace XWP\CountryCard;
 
 /**
  * Register the block.
+ *
+ * @since 1.0.0
+ *
+ * @see register_block_type
  */
 function block_init() {
 	register_block_type( __DIR__ . '/build' );
@@ -25,6 +33,12 @@ add_action( 'init', __NAMESPACE__ . '\\block_init' );
 
 /**
  * Disable WP emojis.
+ *
+ * @since 1.0.0
+ *
+ * @see remove_action
+ * @see remove_filter
+ * @see add_filter
  */
 function disable_emojis() {
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
@@ -43,17 +57,19 @@ add_action( 'init', __NAMESPACE__ . '\\disable_emojis' );
 /**
  * Remove emoji CDN hostname from DNS prefetching hints.
  *
+ * @since 1.0.0
+ *
  * @param array  $urls          URLs to print for resource hints.
  * @param string $relation_type The relation type the URLs are printed for.
  *
  * @return array Difference between the two arrays.
  */
 function remove_emoji_dns_prefetch( $urls, $relation_type ) {
-	if ( 'dns-prefetch' == $relation_type ) {
+	if ( 'dns-prefetch' === $relation_type ) {
 		/** This filter is documented in wp-includes/formatting.php */
 		$emoji_svg_url = apply_filters( 'emoji_svg_url', 'https://s.w.org/images/core/emoji/2/svg/' );
 
-		$urls = array_diff( $urls, [ $emoji_svg_url ] );
+		$urls = array_diff( $urls, array( $emoji_svg_url ) );
 	}
 
 	return $urls;
