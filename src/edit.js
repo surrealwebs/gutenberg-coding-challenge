@@ -17,10 +17,6 @@ import { __ } from '@wordpress/i18n';
 import countries from '../assets/countries.json';
 import { getEmojiFlag } from './utils';
 import Preview from './preview';
-
-/**
- * Internal dependencies
- */
 import './editor.scss';
 
 export default function Edit( { attributes, setAttributes } ) {
